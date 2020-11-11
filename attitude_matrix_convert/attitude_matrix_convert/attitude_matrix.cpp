@@ -42,7 +42,7 @@ void Euler_angle::operator=(Euler_angle input)
 Matrix3f Euler_angle::EA2DCM()
 {
 	Matrix3f result = Eigen::Matrix3f::Zero();
-	float phi = value(0), theta = value(1), gamma = value(2);
+	float phi  = value(0), theta = value(1), gamma = value(2);
 	//method 1
 	// line 1
 	result(0, 0) = cos(phi)*cos(gamma) - sin(phi)*sin(theta)*sin(gamma);
@@ -216,6 +216,22 @@ Matrix3f Quaternion_vector::QV2DCM()
 	result(2, 2) = value(0)*value(0) - value(1)*value(1) - value(2)*value(2) + value(3)*value(3);
 	return result;
 }
+
+// 四元数 --> 等效旋转矢量
+Vector3f Quaternion_vector::QV2ERV()
+{
+	Vector3f result = Eigen::Vector3f::Zero();
+	if (value(1) < 0)
+		value = -value;
+	float hnorm = acos(value(1));	//等效旋转矢量模值的一半
+	float b = 0;
+	if (hnorm > 1e-20)
+		b = 2 * hnorm / sin(hnorm);
+	else
+		b = 2;
+	result(0) = b*value(1), result(1) = b*value(2), result(2) = b*value(3);
+	return result;
+}
 // ==========================================Quaternion End ============================================
 
 
@@ -247,6 +263,8 @@ Vector4f Equivalent_rotation_vector::ERV2QV()
 	result(3) = temp / 2 * value(2);
 	return result;
 }
+
+//等效旋转矢量 -->方向余弦阵
 
 
 // ==========================================Equivalent rotation vector End ===========================================

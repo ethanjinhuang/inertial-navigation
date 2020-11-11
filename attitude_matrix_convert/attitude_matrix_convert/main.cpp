@@ -7,7 +7,7 @@ void main()
 {
 	// test 
 	Vector3f initional_data;
-	initional_data << 1, 2, 3;
+	initional_data << 1, 1, 1;
 	//Euler Angle
 	Euler_angle ea(initional_data);
 	cout << "## Euler angle ##" << endl;
@@ -29,7 +29,7 @@ void main()
 	ea << dcm.DCM2EA();
 	ea.show();
 	cout << endl << "## Direct cosine matrix 2 Quaternion ##" << endl;
-	qv << dcm.DCM2QV();
+	qv << dcm.DCM2QV(); 
 	qv.show();
 
 	cout << endl << endl << "## Quaternion vector ##" << endl;
@@ -40,7 +40,6 @@ void main()
 	cout << endl << "## Quaternion 2 Direct cosine matrix ##" << endl;
 	dcm << qv.QV2DCM();
 	dcm.show();
-
 
 	system("pause");
 }

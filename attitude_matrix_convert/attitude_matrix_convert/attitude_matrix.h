@@ -33,7 +33,7 @@ public:
 	Vector4f EA2QV();	// 欧拉角-->四元数
 	// Basic function
 	void show();
-	void initialize() { value = Eigen::Vector3f::Zero(); };		//初始化
+	void initialize() { value =  Eigen::Vector3f::Zero(); };		//初始化
 	void operator<<(Vector3f vector3);			//重载<<，便于向量赋值
 	void operator=(Euler_angle input);	//重载=，便于对象间赋值
 };
@@ -62,13 +62,15 @@ public:
 	Quaternion_vector() {value = Eigen::Vector4f::Zero();}
 	Quaternion_vector(Vector4f &input);
 	//transform function
-	Vector3f QV2EA();	//四元数--> 欧拉角
+	Vector3f QV2EA();	//四元数 --> 欧拉角
 	Matrix3f QV2DCM();	//四元数 --> 方向余弦阵
+	Vector3f QV2ERV();	//四元数 --> 等效旋转矢量
 	// Basic function
 	void show();
 	void initialize() { value = Eigen::Vector4f::Zero(); };		//初始化
 	void operator<<(Vector4f &matrix3);		//重载<<，便于向量赋值
 	void operator=(Quaternion_vector &input);//重载=，便于对象间赋值
+	
 };
 
 // 等效旋转矢量
@@ -80,6 +82,7 @@ public:
 	Equivalent_rotation_vector(Vector3f input);
 	//transform function
 	Vector4f ERV2QV();	//等效旋转矢量 -->四元数
+	Matrix3f ERV2DCM();	//等效旋转矢量 -->方向余弦阵
 	// Basic function
 	void show();
 	void initialize() { value = Eigen::Vector3f::Zero(); };		//初始化
