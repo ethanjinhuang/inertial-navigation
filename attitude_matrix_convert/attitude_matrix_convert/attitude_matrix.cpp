@@ -1,11 +1,9 @@
 #include"attitude_matrix.h"
 
-
 // 创建用于交换的临时对象。
 Euler_angle ea_temp;
 Direct_cosine_matrix dcm_temp;
 Quaternion_vector qv_temp;
-
 
 // ==========================================Euler Start==========================================
 
@@ -56,22 +54,7 @@ Matrix3f Euler_angle::EA2DCM()
 	result(2, 0) = -cos(theta)*sin(gamma);
 	result(2, 1) = sin(theta);
 	result(2, 2) = cos(theta)*cos(gamma);
-	
-	// method 2
-	/*
-	// line 1
-	result(0, 0) = cos(theta)*cos(gamma);
-	result(0, 1) = sin(phi)*sin(theta)*cos(gamma) - cos(phi)*sin(gamma);
-	result(0, 2) = cos(phi)*sin(theta)*cos(gamma) + sin(phi)*sin(gamma);
-	// line 2
-	result(1, 0) = cos(phi)*sin(gamma);
-	result(1, 1) = sin(phi)*sin(theta)*sin(gamma) + cos(phi)*cos(gamma);
-	result(1, 2) = cos(phi)*sin(theta)*sin(gamma) - sin(phi)*cos(gamma);
-	// line 3
-	result(2, 0) = -sin(theta);
-	result(2, 1) = sin(phi)*cos(theta);
-	result(2, 2) = cos(phi)*cos(theta);
-	*/
+
 	return result;
 }
 
@@ -87,6 +70,13 @@ Vector4f Euler_angle::EA2QV()
 	result(2) = sin(hphi)*sin(htheta)*cos(hgamma) + cos(hphi)*cos(htheta)*sin(htheta);
 	result(3) = sin(hphi)*cos(htheta)*cos(hgamma) - cos(hphi)*sin(htheta)*sin(htheta);
 	return result;
+}
+
+// 欧拉角 --> 等效旋转矢量
+Vector3f Euler_angle::EA2ERV()
+{
+	Quaternion_vector qv(this->EA2QV());
+	return qv.QV2ERV();
 }
 
 // ========================================== Euler End ===========================================
@@ -152,6 +142,13 @@ Vector4f Direct_cosine_matrix::DCM2QV()
 		result(0) = 0.5*sqrt(1 + c11 + c22 + c33), result(1) = (c32 - c23) / (4 * result(0)), result(2) = (c13 + c31) / (4 * result(0)), result(3) = (c21 + c12) / (4 * result(0));
 
 	return result;
+}
+
+// 方向余弦阵 --> 等效旋转矢量
+Vector3f Direct_cosine_matrix::DCM2ERV()
+{
+	Quaternion_vector qv(this->DCM2QV());
+	return qv.QV2ERV();
 }
 
 void Direct_cosine_matrix::show()
@@ -221,9 +218,9 @@ Matrix3f Quaternion_vector::QV2DCM()
 Vector3f Quaternion_vector::QV2ERV()
 {
 	Vector3f result = Eigen::Vector3f::Zero();
-	if (value(1) < 0)
+	if (value(0) < 0)
 		value = -value;
-	float hnorm = acos(value(1));	//等效旋转矢量模值的一半
+	float hnorm = acos(value(0));	//等效旋转矢量模值的一半
 	float b = 0;
 	if (hnorm > 1e-20)
 		b = 2 * hnorm / sin(hnorm);
@@ -246,25 +243,50 @@ void Equivalent_rotation_vector::show()
 	cout << value << endl;
 }
 
+void Equivalent_rotation_vector::operator<<(Vector3f &vector3)
+{
+	value = vector3;
+}
 
+void Equivalent_rotation_vector::operator=(Equivalent_rotation_vector &input)
+{
+	this->value = input.value;
+}
+//等效旋转矢量 --> 四元数
 Vector4f Equivalent_rotation_vector::ERV2QV()
 {
 	Vector4f result = Eigen::Vector4f::Zero();
-	float norm = sqrt(value.transpose()*value);	//计算旋转矢量的模
+	float norm = value.transpose()*value;
 	float temp = 0;
-	if (norm > 1.e-20)
-		temp = sin(norm / 2) / (norm / 2);
+	if (norm < 1.e-8)
+	{
+		result(0) = 1 - norm*(1.0 / 8 - norm / 384);
+		temp = 0.5 - norm * (1.0 / 48 - norm / 3840);
+	}
 	else
-		temp = 1;
-	//Q = q0 + qv = cos(phi/2) + usin(phi/2)
-	result(0) = cos(norm / 2);
-	result(1) = temp / 2 * value(0);
-	result(2) = temp / 2 * value(1);
-	result(3) = temp / 2 * value(2);
+	{
+		norm = sqrt(norm);
+		result(0) = cos(norm / 2);
+		temp = sin(norm / 2) / norm;
+	}
+	result(1) = temp * value(0);
+	result(2) = temp * value(1);
+	result(3) = temp * value(2);
 	return result;
 }
 
 //等效旋转矢量 -->方向余弦阵
+Matrix3f Equivalent_rotation_vector::ERV2DCM()
+{
+	Quaternion_vector qv(this->ERV2QV());
+	return qv.QV2DCM();
+}
 
+//等效旋转矢量 --> 欧拉角
+Vector3f Equivalent_rotation_vector::ERV2EA()
+{
+	Quaternion_vector qv(this->ERV2QV());
+	return qv.QV2EA();
+}
 
 // ==========================================Equivalent rotation vector End ===========================================

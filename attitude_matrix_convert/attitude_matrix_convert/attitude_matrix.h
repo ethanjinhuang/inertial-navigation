@@ -29,8 +29,9 @@ public:
 	Euler_angle(float phi, float theta, float gamma);
 	Euler_angle(Vector3f input_vector);
 	//transform function
-	Matrix3f EA2DCM();	// 欧拉角-->方向余弦阵
-	Vector4f EA2QV();	// 欧拉角-->四元数
+	Matrix3f EA2DCM();	// 欧拉角 --> 方向余弦阵
+	Vector4f EA2QV();	// 欧拉角 --> 四元数
+	Vector3f EA2ERV();	// 欧拉角 --> 等效旋转矢量
 	// Basic function
 	void show();
 	void initialize() { value =  Eigen::Vector3f::Zero(); };		//初始化
@@ -47,6 +48,7 @@ public:
 	//transform function
 	Vector3f DCM2EA();	// 方向余弦阵 --> 欧拉角
 	Vector4f DCM2QV();	// 方向余弦阵 --> 四元数
+	Vector3f DCM2ERV();	// 方向余弦阵 --> 等效旋转矢量
 	// Basic function
 	void show();
 	void initialize() { value = Eigen::Matrix3f::Zero(); };		//初始化
@@ -81,12 +83,13 @@ public:
 	Equivalent_rotation_vector(){ value = Eigen::Vector3f::Zero(); }
 	Equivalent_rotation_vector(Vector3f input);
 	//transform function
-	Vector4f ERV2QV();	//等效旋转矢量 -->四元数
-	Matrix3f ERV2DCM();	//等效旋转矢量 -->方向余弦阵
+	Vector4f ERV2QV();	//等效旋转矢量 --> 四元数
+	Matrix3f ERV2DCM();	//等效旋转矢量 --> 方向余弦阵
+	Vector3f ERV2EA();	//等效旋转矢量 --> 欧拉角
 	// Basic function
 	void show();
 	void initialize() { value = Eigen::Vector3f::Zero(); };		//初始化
-	//void operator<<(Vector3f &matrix3);						//重载<<，便于向量赋值
-	//void operator=(Equivalent_rotation_vector &input);		//重载=，便于对象间赋值
+	void operator<<(Vector3f &vector3);							//重载<<，便于向量赋值
+	void operator=(Equivalent_rotation_vector &input);		//重载=，便于对象间赋值
 };
 
