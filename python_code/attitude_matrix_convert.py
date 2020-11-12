@@ -48,3 +48,47 @@ def dcm2ea(direct_cosine_matrix):
         result[2] = arctan2(direct_cosine_matrix[0, 2], direct_cosine_matrix[0, 0])
     return result
 
+
+# 将 方向余弦阵 转换为 四元数
+def dcm2qv(dcm):
+    return
+
+
+# 将 四元数 转换为 欧拉角
+def qv2ea(qv):
+    return
+
+
+# 将 四元数 转换为 方向余弦阵
+def qv2dcm(qv):
+    return
+
+
+# 将 四元数 转换为 等效旋转矢量
+def qv2erv(qv):
+    return
+
+
+# 将 等效旋转矢量 转化为 四元数
+def erv2qv(erv):
+    return
+
+
+# 将 欧拉角 转换为 等效旋转矢量
+def ea2erv(ea):
+    return
+
+
+# 将 方向余弦阵 转换为 等效旋转矢量
+def dcm2erv(dcv):
+    return
+
+
+# 将 等效旋转矢量 转化为 方向余弦阵
+def erv2dcm(erv):
+    return
+
+
+# 将 等效旋转矢量 转化为 欧拉角
+def erv2ea(erv):
+    return
