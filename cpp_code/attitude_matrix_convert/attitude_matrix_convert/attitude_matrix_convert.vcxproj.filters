@@ -21,12 +21,18 @@
     <ClCompile Include="attitude_matrix.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Transformation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="attitude_matrix.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="coordinate_transformation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformation.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

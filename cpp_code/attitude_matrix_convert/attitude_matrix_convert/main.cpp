@@ -1,10 +1,16 @@
 #include <iostream>
 #include <Eigen\Dense>
 #include"attitude_matrix.h"
+#include"Transformation.h"
 using namespace std;
 using namespace Eigen;
+
+//#define attitude_matrix
+#define transformation
+
 void main()
 {
+#ifdef attitude_matrix
 	// test 
 	Vector3f initional_data;
 	initional_data << 1, 1, 1;
@@ -28,7 +34,7 @@ void main()
 	ea << dcm.DCM2EA();
 	ea.show();
 	cout << endl << "## Direct cosine matrix 2 Quaternion ##" << endl;
-	qv << dcm.DCM2QV(); 
+	qv << dcm.DCM2QV();
 	qv.show();
 	cout << endl << "## Direct cosine matrix 2 Equivalent rotation vector ##" << endl;
 	erv << dcm.DCM2ERV();
@@ -57,6 +63,32 @@ void main()
 	cout << endl << "## Equivalent_rotation_vector 2 Direct cosine matrix ##" << endl;
 	dcm << erv.ERV2DCM();
 	dcm.show();
+#endif // attidtude_matrix
+
+#ifdef transformation
+	//大地->地心
+	geodeticToGeocentric func0;
+	Geocentric c(20.0, 30.0, 10000, func0);
+	Vector v0(c.getCoordinate());
+	cout << "(X,Y,Z)" << endl;
+	for (auto i : v0)
+	{
+		cout << i << endl;
+	}
+	cout << endl;
+	//地心->大地
+	cout << "(lamda,L,h)" << endl;
+	geocentricToGeodetic func1;
+	Geodetic g(27000, 11000, 10000, func1);
+	Vector v(g.getCoordinate());
+	for (auto i : v)
+	{
+		cout << i << endl;
+	}
+
+#endif // transformation
+
+	
 
 	system("pause");
 }

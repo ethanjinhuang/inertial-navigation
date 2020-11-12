@@ -1,11 +1,3 @@
 ﻿  main.cpp
-  attitude_matrix.cpp
-d:\github\inertial navigation\cpp_code\attitude_matrix_convert\attitude_matrix_convert\attitude_matrix.cpp(136): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\github\inertial navigation\cpp_code\attitude_matrix_convert\attitude_matrix_convert\attitude_matrix.cpp(138): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\github\inertial navigation\cpp_code\attitude_matrix_convert\attitude_matrix_convert\attitude_matrix.cpp(140): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\github\inertial navigation\cpp_code\attitude_matrix_convert\attitude_matrix_convert\attitude_matrix.cpp(142): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\github\inertial navigation\cpp_code\attitude_matrix_convert\attitude_matrix_convert\attitude_matrix.cpp(263): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\github\inertial navigation\cpp_code\attitude_matrix_convert\attitude_matrix_convert\attitude_matrix.cpp(264): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-  正在生成代码...
   attitude_matrix_convert.vcxproj -> D:\GitHub\inertial navigation\cpp_code\attitude_matrix_convert\Debug\attitude_matrix_convert.exe
   attitude_matrix_convert.vcxproj -> D:\GitHub\inertial navigation\cpp_code\attitude_matrix_convert\Debug\attitude_matrix_convert.pdb (Partial PDB)

@@ -23,6 +23,7 @@ C++	Python	MATLAB 	C#
 * [x] CPP上构建四种坐标变化方式之间的相互转换。
 * [ ] 将程序迁移至MATLAB 与 Python 平台
 * [ ] 将程序迁移至MATLAB 与 Python 平台
+* [x] 大地坐标系转换
 
 #### :email:使用说明
 

@@ -113,10 +113,12 @@
   <ItemGroup>
     <ClCompile Include="attitude_matrix.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="attitude_matrix.h" />
     <ClInclude Include="coordinate_transformation.h" />
+    <ClInclude Include="Transformation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
