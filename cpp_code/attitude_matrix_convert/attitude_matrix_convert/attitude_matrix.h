@@ -19,6 +19,7 @@ using namespace std;
 class Euler_angle;
 class Direct_cosine_matrix;
 class Quaternion_vector;
+class Equivalent_rotation_vector;
 
 // Å·À­½Ç
 class Euler_angle

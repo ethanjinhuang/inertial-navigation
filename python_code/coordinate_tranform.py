@@ -8,10 +8,10 @@
 # @Time : 2020/11/14 9:06
 # @File : coordinate_tranform.py
 # @Software: PyCharm
-# @Desc : 
+# @Desc : 实现了大地坐标系与地心直角坐标系之间的相互转换
 # ==================================================
 # import numpy as np
-from numpy import sin, cos, sqrt, arctan2, arctan
+from numpy import sin, cos, sqrt, arctan2, arctan, pi
 
 # 常数
 R_e = 6378160.0  # 地球半径（椭圆长半轴）
@@ -35,25 +35,34 @@ def gcs2gc(lam, L, h):
 # 地心直角坐标系转换为大地坐标系
 def gc2gcs(x, y, z):
     lam = arctan2(y, x)
-    L = acu_tanl(0, x, y, z)
+    L = acu_tan_l(0, x, y, z)
     R_N = R_e / sqrt(1 - e1 * e1 * sin(L) * sin(L))
     h = sqrt(x * x + y * y) / cos(L) - R_N
     return lam, L, h
 
 
 # 迭代计算纬度L
-def acu_tanl(t, x, y, z):
+def acu_tan_l(t, x, y, z):
     ti = (1 / sqrt(x * x + y * y)) * (z + R_e * e1 * e1 * t / sqrt(1 + (1 - e1 * e1) * t * t))
     if abs(ti - t) <= 1e-20:
         return arctan(ti)
     else:
-        return acu_tanl(ti, x, y, z)
+        return acu_tan_l(ti, x, y, z)
 
 
 # check main
-x, y, z = gcs2gc(1, 1, 100)
+
+def deg2rad(degree):
+    return degree * pi / 180
+
+
+def rad2deg(rad):
+    return rad * 180 / pi
+
+
+x, y, z = gcs2gc(deg2rad(20), deg2rad(30), 10000)
 
 l, L, h = gc2gcs(x, y, z)
-
+print('input l: {} L: {} h: {}'.format(20, 30, 10000))
 print('x: {} y: {} z: {}'.format(x, y, z))
-print('l: {} L: {} h: {}'.format(l, L, h))
+print('l: {} L: {} h: {}'.format(rad2deg(l), rad2deg(L), h))

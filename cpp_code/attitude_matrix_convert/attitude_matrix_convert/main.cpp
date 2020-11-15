@@ -5,8 +5,8 @@
 using namespace std;
 using namespace Eigen;
 
-//#define attitude_matrix
-#define transformation
+#define attitude_matrix
+//#define transformation
 
 void main()
 {
@@ -63,6 +63,9 @@ void main()
 	cout << endl << "## Equivalent_rotation_vector 2 Direct cosine matrix ##" << endl;
 	dcm << erv.ERV2DCM();
 	dcm.show();
+
+
+
 #endif // attidtude_matrix
 
 #ifdef transformation
@@ -79,7 +82,7 @@ void main()
 	//地心->大地
 	cout << "(lamda,L,h)" << endl;
 	geocentricToGeodetic func1;
-	Geodetic g(27000, 11000, 10000, func1);
+	Geodetic g(5.203e+06, 1.89374e+06, 3.17537e+06, func1);
 	Vector v(g.getCoordinate());
 	for (auto i : v)
 	{

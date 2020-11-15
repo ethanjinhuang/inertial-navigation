@@ -1,12 +1,13 @@
-function q = erv2q(erv)
-% transform Equivalent rotation vector to quaternion
-% 将等效旋转矢量转换为四元数
-% 等效旋转矢量格式  [u1; u2; u3]
-% 四元数格式       [q0; q1; q2; q3]
-norm = sqrt(erv'*erv);  % 计算旋转矢量的模
-if norm > 1.e-20
-    f = sin(norm/2)/(norm/2);
-else
-    f = 1;
+function Q= erv2Q(erv)
+    nm2=erv'*erv;
+    if nm2<1e-8
+        q0=1-nm2*(1/8-nm2/384);
+        s=1/2-nm2*(1/48-nm2/3840);
+    else
+        nm=sqrt(nm2);
+        q0=cos(nm/2);
+        s=sin(nm/2)/nm;
+    end
+    Q=[q0;s*erv];
 end
-q = [cos(norm/2);f/2*erv];  % Q = q0 + qv = cos(phi/2) + usin(phi/2)
+

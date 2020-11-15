@@ -9,7 +9,7 @@ const double pi = acos(-1);
 double getArc(double angle);
 double getAngle(double arc);
 double getE(double a, double b);
-//´óµØ×ø±êÏµ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµ
 class Geodetic
 {
 protected:
@@ -18,12 +18,12 @@ protected:
 	double H;
 public:
 	Geodetic(double lamda, double l, double h) :Lamda(lamda), L(l), H(h) {}
-	//µØÐÄ->´óµØ£¬¿É×Ô¶¨ÒåËã·¨
+	//ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ã·¨
 	template<typename VST> Geodetic(double X, double Y, double Z, VST&& func);
-	Vector getCoordinate();//»ñµÃ×ø±ê
+	Vector getCoordinate();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 };
 
-//µØÐÄ×ø±êÏµ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµ
 class Geocentric
 {
 protected:
@@ -32,9 +32,9 @@ protected:
 	double Z;
 public:
 	Geocentric(double x, double y, double z) :X(x), Y(y), Z(z) {}
-	//´óµØ->µØÐÄ£¬¿É×Ô¶¨ÒåËã·¨
+	//ï¿½ï¿½ï¿½->ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ã·¨
 	template<typename VST> Geocentric(double Lamda, double L, double H, VST&& func);
-	Vector getCoordinate();//»ñµÃ×ø±ê
+	Vector getCoordinate();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 };
 
 template<typename VST>
