@@ -1,9 +1,9 @@
 #include"Transformation.h"
 
 
-Vector geodeticToGeocentric::operator()(double Lamda, double L, double H)
+stdVectord geodeticToGeocentric::operator()(double Lamda, double L, double H)
 {
-	Vector v;
+	stdVectord v;
 	double N = a / sqrt(1 - pow(e, 2.0)*pow(sin(L), 2.0));
 	v.push_back((N + H)*cos(L)*cos(Lamda));
 	v.push_back((N + H)*cos(L)*sin(Lamda));
@@ -12,9 +12,9 @@ Vector geodeticToGeocentric::operator()(double Lamda, double L, double H)
 }
 
 
-Vector geocentricToGeodetic::operator()(double X, double Y, double Z)
+stdVectord geocentricToGeodetic::operator()(double X, double Y, double Z)
 {
-	Vector v;
+	stdVectord v;
 	double Lamda = atan2(Y, X);
 	v.push_back(Lamda);
 
@@ -35,18 +35,18 @@ Vector geocentricToGeodetic::operator()(double X, double Y, double Z)
 	return v;
 }
 
-Vector Geocentric::getCoordinate()
+stdVectord Geocentric::getCoordinate()
 {
-	Vector v;
+	stdVectord v;
 	v.push_back(X);
 	v.push_back(Y);
 	v.push_back(Z);
 	return v;
 }
 
-Vector Geodetic::getCoordinate()
+stdVectord Geodetic::getCoordinate()
 {
-	Vector v;
+	stdVectord v;
 	v.push_back(getAngle(Lamda));
 	v.push_back(getAngle(L));
 	v.push_back(H);
