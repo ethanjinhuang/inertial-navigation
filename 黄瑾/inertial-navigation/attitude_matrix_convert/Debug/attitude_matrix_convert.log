@@ -1,0 +1,9 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(attitude_matrix_convert.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  attitude_matrix.cpp
+D:\GitHub\inertial navigation\cpp_code\inertial-navigation\attitude_matrix_convert\attitude_matrix.cpp(147,18): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\cpp_code\inertial-navigation\attitude_matrix_convert\attitude_matrix.cpp(149,18): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\cpp_code\inertial-navigation\attitude_matrix_convert\attitude_matrix.cpp(151,18): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\cpp_code\inertial-navigation\attitude_matrix_convert\attitude_matrix.cpp(153,18): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\cpp_code\inertial-navigation\attitude_matrix_convert\attitude_matrix.cpp(284,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\cpp_code\inertial-navigation\attitude_matrix_convert\attitude_matrix.cpp(285,14): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  attitude_matrix_convert.vcxproj -> D:\GitHub\inertial navigation\cpp_code\inertial-navigation\Debug\inertial-navigation.exe
