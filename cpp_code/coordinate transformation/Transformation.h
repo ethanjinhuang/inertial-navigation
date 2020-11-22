@@ -2,14 +2,15 @@
 #define _TRANSFORMATION_H_
 #include<cmath>
 #include<vector>
-typedef std::vector<double> Vector;
+typedef std::vector<double> stdVectord;
 const double pi = acos(-1);
+
 
 
 double getArc(double angle);
 double getAngle(double arc);
 double getE(double a, double b);
-//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµ
+//´óµØ×ø±êÏµ
 class Geodetic
 {
 protected:
@@ -18,12 +19,13 @@ protected:
 	double H;
 public:
 	Geodetic(double lamda, double l, double h) :Lamda(lamda), L(l), H(h) {}
-	//ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ã·¨
+	//µØÐÄ->´óµØ£¬¿É×Ô¶¨ÒåËã·¨
 	template<typename VST> Geodetic(double X, double Y, double Z, VST&& func);
-	Vector getCoordinate();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	template<typename VST> Geodetic(stdVectord geocentric, VST&& func);
+	stdVectord getCoordinate();//»ñµÃ×ø±ê
 };
 
-//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµ
+//µØÐÄ×ø±êÏµ
 class Geocentric
 {
 protected:
@@ -32,33 +34,56 @@ protected:
 	double Z;
 public:
 	Geocentric(double x, double y, double z) :X(x), Y(y), Z(z) {}
-	//ï¿½ï¿½ï¿½->ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ã·¨
+	//´óµØ->µØÐÄ£¬¿É×Ô¶¨ÒåËã·¨
 	template<typename VST> Geocentric(double Lamda, double L, double H, VST&& func);
-	Vector getCoordinate();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	template<typename VST> Geocentric(stdVectord geodetic, VST&& func);
+	stdVectord getCoordinate();//»ñµÃ×ø±ê
 };
+
+
 
 template<typename VST>
 Geocentric::Geocentric(double Lamda, double L, double H, VST&& func)
 {
 	Lamda = getArc(Lamda);
 	L = getArc(L);
-	Vector v = func(Lamda, L, H);
+	stdVectord v = func(Lamda, L, H);
 	X = v[0];
 	Y = v[1];
 	Z = v[2];
 }
 
 
+template<typename VST> 
+Geocentric::Geocentric(stdVectord geodetic, VST&& func)
+{
+	double Lamda = getArc(geodetic[0]);
+	double L = getArc(geodetic[1]);
+	double H = geodetic[2];
+	stdVectord v = func(Lamda, L, H);
+	X = v[0];
+	Y = v[1];
+	Z = v[2];
+}
+
 
 template<typename VST> 
 Geodetic::Geodetic(double X, double Y, double Z, VST&& func)
 {
-	Vector v = func(X, Y, Z);
+	stdVectord v = func(X, Y, Z);
 	Lamda = v[0];
 	L = v[1];
 	H = v[2];
 }
 
+template<typename VST> 
+Geodetic::Geodetic(stdVectord geocentric, VST&& func)
+{
+	stdVectord v = func(geocentric[0], geocentric[1], geocentric[2]);
+	Lamda = v[0];
+	L = v[1];
+	H = v[2];
+}
 
 
 class geodeticToGeocentric
@@ -72,7 +97,7 @@ public:
 	{
 		e = getE(a, b);
 	}
-	Vector operator()(double Lamda, double L, double H);
+	stdVectord operator()(double Lamda, double L, double H);
 };
 
 class geocentricToGeodetic
@@ -86,7 +111,7 @@ public:
 	{
 		e = getE(a, b);
 	}
-	Vector operator()(double X, double Y, double Z);
+	stdVectord operator()(double X, double Y, double Z);
 };
 
 
