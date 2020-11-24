@@ -1,15 +1,27 @@
+/*
+*************************************************************************************
+*file:	main.cpp
+*@Description:	捷联姿态导航程序主函数
+*creator：Jin Huang
+*organization:sdust
+*e-mail:kim.huang.j@qq.com
+*datetime：09/11/2020
+*************************************************************************************
+*/
 #include <iostream>
 #include <Eigen\Dense>
 #include"attitude_matrix.h"
 #include"coordinate_convert.h"
 #include"earth_parameter.h"
-//#include"Transformation.h"
+#include"read_imr_file.h"
+#include"attitude_updating.h"
 using namespace std;
 using namespace Eigen;
 
 //#define attitude_matrix
 //#define transformation
-
+#define read_data
+#define attitude_updating
 void main()
 {
 	//验证姿态表示方法间转换
@@ -79,12 +91,60 @@ void main()
 	BLH = gc2gcs(xyz);
 	cout << BLH << endl;
 #endif // transformation
-	Vector4f x;
-	x << 1, 2, 3, 4;
-	Quaternion_vector qv1(x);
-	qv1.show();
-	Quaternion_vector qv2(qv1 * qv1);
-	qv2.show();
+	//Vector4f x;
+	//x << 1, 2, 3, 4;
+	//Quaternion_vector qv1(x);
+	//qv1.show();
+	//Quaternion_vector qv2(qv1 * qv1);
+	//qv2.show();
+
+#ifdef read_data
+	// ==========读取imr文件===========
+	IMR_Header* data_header = new IMR_Header;	
+	vector<adj_IMR_Record> adj_data;
+	char* file_path = "..\\imr_data\\20200911_095111_001.imr";
+	fstream imrfile(file_path, ios::in | ios::binary);	// 打开文件
+	if (imrfile)
+	{
+		read_imr_header(imrfile, data_header);	// 读取头文件
+		read_imr_data(imrfile, adj_data, *data_header);	// 读取数据文件
+		std::cout << "Finish Reading, The total data num is: " << adj_data.size() << endl;
+	}
+	else
+	{
+		cerr << "Open file error!" << endl;
+		exit(0);
+	}
+	// ==========完成imr读取===========
+#endif // read_data
+
+#ifdef attitude_updating
+	// 进行姿态更新
+	// 定义姿态更新矩阵
+	int data_num = 1;	//选择的数据序号
+	Direct_cosine_matrix au;
+	// 定义前一时刻的QV Qnb
+	Euler_angle ea(1, 1, 1);
+	Quaternion_vector Qnb(ea.EA2QV());
+	// 定义 第一次、第二次采样 v3f 
+	Vector3f theta1 = Eigen::Vector3f::Zero();
+	Vector3f theta2 = Eigen::Vector3f::Zero();
+	theta1 << adj_data[data_num].gx, adj_data[data_num].gy, adj_data[data_num].gz;
+	theta2 << adj_data[data_num + 1].gx, adj_data[data_num + 1].gy, adj_data[data_num + 1].gz;
+	// 定义初始位置 v3f
+	Vector3f pos = Eigen::Vector3f::Zero();
+	pos << 10000, 10000, 10000;
+	// 定义速度 v3f
+	Vector3f vec = Eigen::Vector3f::Zero();
+	vec << adj_data[data_num].ax, adj_data[data_num].ay, adj_data[data_num].az;
+	// 定义采样间隔 float
+	float T = 1.0 / data_header->dDataRateHz;
+	au = attitude_update(Qnb, theta1, theta2, pos, vec, T);
+	au.show();
+
+#endif // attitude_updating
+	
+
 
 	system("pause");
 }

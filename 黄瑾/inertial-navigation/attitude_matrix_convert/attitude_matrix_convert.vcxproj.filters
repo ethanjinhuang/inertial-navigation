@@ -35,5 +35,8 @@
     <ClInclude Include="earth_parameter.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="read_imr_file.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
