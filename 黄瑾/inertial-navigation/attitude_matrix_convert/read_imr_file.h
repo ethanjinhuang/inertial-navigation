@@ -78,8 +78,18 @@ struct adj_IMR_Record
 	double az;			// 关于IMU z轴的缩放加速测量
 };
 
+class imr_data
+{
+public:
+	IMR_Header* file_header;
+	vector<adj_IMR_Record> file_data;
+	void read_data(char* filepath);
+private:
+	void read_imr_header(fstream& imrfile, IMR_Header* imrheader);
+	void read_imr_data(fstream& imrfile, vector<adj_IMR_Record>& adj_data, IMR_Header imr_header);
+};
 
-void read_imr_header(fstream &imrfile, IMR_Header *imrheader)
+void imr_data::read_imr_header(fstream &imrfile, IMR_Header *imrheader)
 {
 	/*
 	*************************************************************************************
@@ -137,7 +147,7 @@ void read_imr_header(fstream &imrfile, IMR_Header *imrheader)
 
 
 
-void read_imr_data(fstream& imrfile, vector<adj_IMR_Record> &adj_data, IMR_Header imr_header)
+void imr_data::read_imr_data(fstream& imrfile, vector<adj_IMR_Record> &adj_data, IMR_Header imr_header)
 {
 
 	/*
@@ -187,4 +197,22 @@ void read_imr_data(fstream& imrfile, vector<adj_IMR_Record> &adj_data, IMR_Heade
 		adj_data.push_back(*temp_data);
 	}
 	imrfile.close();
+}
+
+
+void imr_data::read_data(char* file_path)
+{
+	file_header = new IMR_Header;
+	fstream imrfile(file_path, ios::in | ios::binary);	// 打开文件
+	if (imrfile)
+	{
+		read_imr_header(imrfile, file_header);	// 读取头文件
+		read_imr_data(imrfile, file_data, *file_header);	// 读取数据文件
+		std::cout << "Finish Reading, The total data num is: " << file_data.size() << endl;
+	}
+	else
+	{
+		cerr << "Open file error!" << endl;
+		exit(0);
+	}
 }

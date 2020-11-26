@@ -21,4 +21,5 @@ public:
     const double e1 = sqrt(R_e * R_e - R_p * R_p) / R_e;	// 地球第一偏心率
     const double e2 = sqrt(R_e * R_e - R_p * R_p) / R_p;	// 地球第二偏心率
     const double phi_ie = 7.2921151467e-5;  // 地球自转角速率
+    const double g0 = 9.7803267714; // 地球重力常数
 }earth;

@@ -10,18 +10,19 @@
 */
 #include <iostream>
 #include <Eigen\Dense>
-#include"attitude_matrix.h"
-#include"coordinate_convert.h"
-#include"earth_parameter.h"
-#include"read_imr_file.h"
-#include"attitude_updating.h"
+#include"attitude_matrix.h"		// 姿态矩阵
+#include"coordinate_convert.h"	// 坐标转换
+#include"earth_parameter.h"		// 地球参数
+#include"read_imr_file.h"		// 读取imr文件
+#include"updating.h"	// 姿态更新
+#include"speed_updating.h"		// 速度更新
 using namespace std;
 using namespace Eigen;
 
 //#define attitude_matrix
 //#define transformation
-#define read_data
-#define attitude_updating
+#define read_imr_data
+//#define attitude_updating
 void main()
 {
 	//验证姿态表示方法间转换
@@ -98,30 +99,19 @@ void main()
 	//Quaternion_vector qv2(qv1 * qv1);
 	//qv2.show();
 
-#ifdef read_data
+#ifdef read_imr_data
 	// ==========读取imr文件===========
-	IMR_Header* data_header = new IMR_Header;	
-	vector<adj_IMR_Record> adj_data;
 	char* file_path = "..\\imr_data\\20200911_095111_001.imr";
-	fstream imrfile(file_path, ios::in | ios::binary);	// 打开文件
-	if (imrfile)
-	{
-		read_imr_header(imrfile, data_header);	// 读取头文件
-		read_imr_data(imrfile, adj_data, *data_header);	// 读取数据文件
-		std::cout << "Finish Reading, The total data num is: " << adj_data.size() << endl;
-	}
-	else
-	{
-		cerr << "Open file error!" << endl;
-		exit(0);
-	}
+	imr_data data;
+	data.read_data(file_path);
+	
 	// ==========完成imr读取===========
-#endif // read_data
+#endif // read_imr_data
 
 #ifdef attitude_updating
 	// 进行姿态更新
 	// 定义姿态更新矩阵
-	int data_num = 1;	//选择的数据序号
+	int data_num = 0;	//选择的数据序号
 	Direct_cosine_matrix au;
 	// 定义前一时刻的QV Qnb
 	Euler_angle ea(1, 1, 1);
@@ -133,14 +123,14 @@ void main()
 	theta2 << adj_data[data_num + 1].gx, adj_data[data_num + 1].gy, adj_data[data_num + 1].gz;
 	// 定义初始位置 v3f
 	Vector3f pos = Eigen::Vector3f::Zero();
-	pos << 10000, 10000, 10000;
+	pos << -2590726.191, 4469381.673, 3728381;
 	// 定义速度 v3f
 	Vector3f vec = Eigen::Vector3f::Zero();
 	vec << adj_data[data_num].ax, adj_data[data_num].ay, adj_data[data_num].az;
 	// 定义采样间隔 float
 	float T = 1.0 / data_header->dDataRateHz;
-	au = attitude_update(Qnb, theta1, theta2, pos, vec, T);
-	au.show();
+	//au = attitude_update(Qnb, theta1, theta2, pos, vec, T);
+	//au.show();
 
 #endif // attitude_updating
 	

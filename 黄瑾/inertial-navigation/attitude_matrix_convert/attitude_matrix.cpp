@@ -46,6 +46,13 @@ void Euler_angle::operator=(Euler_angle input)
 	this->value = input.value;
 }
 
+Euler_angle Euler_angle::operator*(Euler_angle& input)
+{
+	ea_temp.initialize();
+	ea_temp.value = this->value * input.value;
+	return ea_temp;
+}
+
 Euler_angle Euler_angle::operator+(Euler_angle& input)
 {
 	ea_temp.initialize();
