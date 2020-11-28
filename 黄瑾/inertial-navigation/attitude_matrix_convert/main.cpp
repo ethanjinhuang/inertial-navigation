@@ -15,7 +15,6 @@
 #include"earth_parameter.h"		// 地球参数
 #include"read_imr_file.h"		// 读取imr文件
 #include"updating.h"	// 姿态更新
-#include"speed_updating.h"		// 速度更新
 using namespace std;
 using namespace Eigen;
 
@@ -109,32 +108,9 @@ void main()
 #endif // read_imr_data
 
 #ifdef attitude_updating
-	// 进行姿态更新
-	// 定义姿态更新矩阵
-	int data_num = 0;	//选择的数据序号
-	Direct_cosine_matrix au;
-	// 定义前一时刻的QV Qnb
-	Euler_angle ea(1, 1, 1);
-	Quaternion_vector Qnb(ea.EA2QV());
-	// 定义 第一次、第二次采样 v3f 
-	Vector3f theta1 = Eigen::Vector3f::Zero();
-	Vector3f theta2 = Eigen::Vector3f::Zero();
-	theta1 << adj_data[data_num].gx, adj_data[data_num].gy, adj_data[data_num].gz;
-	theta2 << adj_data[data_num + 1].gx, adj_data[data_num + 1].gy, adj_data[data_num + 1].gz;
-	// 定义初始位置 v3f
-	Vector3f pos = Eigen::Vector3f::Zero();
-	pos << -2590726.191, 4469381.673, 3728381;
-	// 定义速度 v3f
-	Vector3f vec = Eigen::Vector3f::Zero();
-	vec << adj_data[data_num].ax, adj_data[data_num].ay, adj_data[data_num].az;
-	// 定义采样间隔 float
-	float T = 1.0 / data_header->dDataRateHz;
-	//au = attitude_update(Qnb, theta1, theta2, pos, vec, T);
-	//au.show();
+
 
 #endif // attitude_updating
 	
-
-
 	system("pause");
 }

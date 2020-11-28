@@ -41,7 +41,7 @@ public:
 	void initialize() { value =  Eigen::Vector3f::Zero(); };		//初始化
 	void operator<<(Vector3f vector3);			// 重载<<，便于向量赋值
 	void operator=(Euler_angle input);	// 重载=，便于对象间赋值
-	Euler_angle operator*(Euler_angle& input);	// 重载*，便于进行乘法运算
+	//Euler_angle operator*(Euler_angle& input);	// 重载*，便于进行乘法运算
 	Euler_angle operator+(Euler_angle& input);
 };
 // 方向余弦阵

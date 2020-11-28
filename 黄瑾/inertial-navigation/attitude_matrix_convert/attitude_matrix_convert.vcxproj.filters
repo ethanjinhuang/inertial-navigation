@@ -9,7 +9,7 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="资源文件">
+    <Filter Include="源文件\资源文件">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
@@ -32,10 +32,10 @@
     <ClInclude Include="earth_parameter.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="read_imr_file.h">
+    <ClInclude Include="speed_updating.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="speed_updating.h">
+    <ClInclude Include="read_imr_file.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="updating.h">

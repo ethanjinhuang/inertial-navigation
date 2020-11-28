@@ -118,11 +118,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="attitude_matrix.h" />
-    <ClInclude Include="updating.h" />
     <ClInclude Include="coordinate_convert.h" />
     <ClInclude Include="earth_parameter.h" />
     <ClInclude Include="read_imr_file.h" />
     <ClInclude Include="speed_updating.h" />
+    <ClInclude Include="updating.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

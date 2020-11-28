@@ -55,6 +55,7 @@ struct input_data
 class update
 {
 public:
+
     update(vector<Direct_cosine_matrix> a1, vector<Vector3f> a3, vector<Vector3f> a4, vector<Vector3f> a5, double a6);
     input_data inputdata;   // 输入数据
     attitude_updating_data attitude_data;           // 姿态更新结果
@@ -205,7 +206,7 @@ void update::speed_update()
     //Vector3f delta_v_bscul = 
     // 计算比力引起的速度变化delta_v_nsf
     Matrix3f I = Eigen::Matrix3f::Identity();
-    Vector3f delta_v_nsf = (I - inputdata.T / 2 * (omega_nie_m_05 * omega_nen_m_05).EA2ssm()) * attitude_data.Cnb_m.value * (inputdata.Velocity[2] + delta_v_brot + delta_v_bscul);
+    Vector3f delta_v_nsf = (I - inputdata.T / 2 * (omega_nie_m_05 + omega_nen_m_05).EA2ssm()) * attitude_data.Cnb_m.value * (inputdata.Velocity[2] + delta_v_brot + delta_v_bscul);
 
     // inputdata.T / 2 是否正确？？？？？？
 
