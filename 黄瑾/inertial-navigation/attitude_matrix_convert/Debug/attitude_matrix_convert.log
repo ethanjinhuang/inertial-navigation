@@ -12,24 +12,46 @@ D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert
 D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\coordinate_convert.h(73,12): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
 D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\coordinate_convert.h(73,20): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
 D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\coordinate_convert.h(73,23): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(85,19): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(114,64): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(114,43): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(169,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(170,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(174,68): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(174,47): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(180,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(181,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(185,68): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(185,47): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(194,38): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(236,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(237,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(241,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(242,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(247,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(248,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(252,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(253,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(104,19): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(129,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(130,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(134,66): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(134,45): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(138,64): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(138,43): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(193,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(194,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(198,68): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(198,47): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(204,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(205,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(209,68): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(209,47): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(218,38): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(260,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(261,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(265,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(266,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(271,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(272,20): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(276,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\updating.h(277,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(115,44): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(115,66): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(115,88): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(116,44): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(116,66): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(116,88): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(123,23): warning C4305: “参数”: 从“double”到“const float”截断
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(123,36): warning C4305: “参数”: 从“double”到“const float”截断
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(123,49): warning C4305: “参数”: 从“double”到“const float”截断
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(124,23): warning C4305: “参数”: 从“double”到“const float”截断
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(124,36): warning C4305: “参数”: 从“double”到“const float”截断
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(124,49): warning C4305: “参数”: 从“double”到“const float”截断
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(128,28): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(128,50): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(128,72): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(129,28): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(129,50): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
+D:\GitHub\inertial navigation\黄瑾\inertial-navigation\attitude_matrix_convert\main.cpp(129,72): warning C4244: “参数”: 从“double”转换到“const float”，可能丢失数据
   attitude_matrix_convert.vcxproj -> D:\GitHub\inertial navigation\黄瑾\inertial-navigation\Debug\inertial-navigation.exe

@@ -42,7 +42,7 @@ struct position_updating_data
 
 struct input_data
 {
-    vector<Direct_cosine_matrix> Dnb;   // 上一时刻的用b系到n系的方向余弦阵
+    Direct_cosine_matrix Dnb;   // 上一时刻的用b系到n系的方向余弦阵
     //vector<Vector3f> delta_theta1;      // 第一次采样
     vector<Vector3f> delta_theta;      // 三次采样，理论上只会用到最后两次
     vector<Vector3f> position;          // 未变化前位置
@@ -55,18 +55,17 @@ struct input_data
 class update
 {
 public:
-
-    update(vector<Direct_cosine_matrix> a1, vector<Vector3f> a3, vector<Vector3f> a4, vector<Vector3f> a5, double a6);
+    //  存放m-1时刻的方向余弦阵，存放m，m-1时刻的采样数据分别于vector[2],vecotr[1]，存放m-1时刻，m-2时刻的位置数据于vector[1],vector[0]，存放m-1,m-2时刻的速度数据于vector[1],vector[0], 存放采样周期
+    update(Direct_cosine_matrix a1, vector<Vector3f> a2, vector<Vector3f> a3, vector<Vector3f> a4, vector<Vector3f> a5, double a7);
     input_data inputdata;   // 输入数据
     attitude_updating_data attitude_data;           // 姿态更新结果
-    vector<speed_updating_data> speed_data;         // 速度更新结果，通常存放两次速度更新结果，[0] m-1 时刻的速度更新，[1]，m 时刻的速度更新
+    vector<speed_updating_data> speed_data;         // 速度更新结果，通常存放三次速度更新结果，[0] m-2 时刻的速度更新，[1]，m -1 时刻的速度更新，[2]，m 时刻的速度更新
     vector<position_updating_data> position_data;   // 位置更新结果，通常存放两次位置更新结果，[0] m-1 时刻的位置，[1]，m 时刻的位置
     void attitude_update(); // 姿态更新
     void speed_update();    // 速度更新
     void position_update(); // 位置更新
     // 定义通用变量
 private:
-    //vector<speed_updating_data> speed_data;
     float sinl, cosl, tanl;
     float Rm;
     float Rn;
@@ -76,19 +75,33 @@ private:
 
 
 // 通常输入为1*3的vector向量，其中vector[0]表示m-2时刻的数据,vector[1]表示m-1时刻的数据,vector[2]表示当前m时刻的数据
-update::update(vector<Direct_cosine_matrix> a1, vector<Vector3f> a3, vector<Vector3f> a4, vector<Vector3f> a5, double a6)
+update::update(Direct_cosine_matrix a1,vector<Vector3f> a2, vector<Vector3f> a3, vector<Vector3f> a4, vector<Vector3f> a5, double a7)
 {
+    // 初始化数据大小
+    inputdata.delta_theta.resize(3);    
+    inputdata.position.resize(3);
+    inputdata.Velocity.resize(3);
+    speed_data.resize(2);   // 第三个数据在其后pushback
+    position_data.resize(1);// 第2个数据在其后pushback
+    // 将输入数据转存至对象中
+    // 存放m - 1时刻的方向余弦阵
     inputdata.Dnb = a1;
-    //inputdata.delta_theta1 = a2;
-    inputdata.delta_theta = a3;
-    inputdata.position = a4;
-    inputdata.Velocity = a5;
-    inputdata.T = a6;
-
-    //// 通用变量计算
-    //sinl = sin(inputdata.position[2](0)); cosl = cos(inputdata.position[2](0)); tanl = tan(inputdata.position[2](0));    // 计算地理纬度为sin cos tan
-    //
-    
+    // 存放m，m - 1时刻的采样数据分别于vector[2], vecotr[1]
+    inputdata.delta_theta[2] = a3[1];
+    inputdata.delta_theta[1] = a3[0];
+    // 初始化存放m-2,m-1时刻的速度与vector[1], vecotr[0]
+    speed_data[1].v_nem = a2[1];
+    speed_data[0].v_nem = a2[0];
+    // 存放m - 1时刻，m - 2时刻的位置数据于vector[1], vector[0]
+    inputdata.position[1] = a4[1];
+    inputdata.position[0] = a4[0];
+    // 存放m , m - 1时刻的速度数据于vector[1], vector[0]
+    inputdata.Velocity[2] = a5[1];
+    inputdata.Velocity[1] = a5[0];
+    // 存放初始位置
+    position_data[0].position = a4[1];
+    // 存放采样周期
+    inputdata.T = a7;
 }
 
 
@@ -111,6 +124,16 @@ void update::attitude_update()
     *e-mail:kim.huang.j@qq.com
     *************************************************************************************
     */
+    // m 时刻
+    sinl = sin(inputdata.position[2](0)); cosl = cos(inputdata.position[2](0)); tanl = tan(inputdata.position[2](0));    // 计算m时刻的地理纬度为sin cos tan
+    Rn = earth.R_e * (1 * earth.e1 * sinl * sinl);   // 计算卯酉圈主曲率半径
+    Rm = earth.R_e * (1 - 2 * earth.e1 + 3 * earth.e1 * sinl * sinl);    // 计算子午圈主曲率半径
+    Rmh = Rm + inputdata.position[2](2); // 实际m时刻长度 子午圈曲率半径 + 大地高与椭球面的距离
+    Rnh = Rn + inputdata.position[2](2); // 实际m时刻长度 子午圈曲率半径 + 大地高与椭球面的距离
+    double g_m = earth.g0 * (1 + 5.27094e-3 * sinl * sinl + 2.32718e-5 * sinl * sinl * sinl * sinl) - 3.086e-6 * inputdata.position[2](2);    // 计算m时刻的当地重力加速度
+    Euler_angle omega_nie_m(0, earth.phi_ie * cosl, earth.phi_ie * sinl);   // 计算m时刻的w_nie，地球自转引起的导航系旋转
+    Euler_angle omega_nen_m(-inputdata.Velocity[2](1) / Rmh, inputdata.Velocity[2](0) / Rnh, inputdata.Velocity[2](0) / Rnh * tanl);    //计算m时刻惯导系统在地球表面附近移动因地球表面弯曲而引起的n系旋转
+
     // 地球（地球坐标系）绕自转轴旋转（地心惯性坐标系下）的角速度在导航坐标系下的投影
     Euler_angle omega_nie(0, earth.phi_ie * cosl, earth.phi_ie * sinl);   
     attitude_data.omega_nie = omega_nie;
@@ -134,7 +157,7 @@ void update::attitude_update()
     Direct_cosine_matrix Cnm_nm_1(Phi_nin.EA2DCM().transpose());
     Direct_cosine_matrix Cbm_1_bm(Phi_bib.EA2DCM());
     Direct_cosine_matrix Cnm_bm(Cnm_nm_1.value);
-    Direct_cosine_matrix Cnb_m_1(inputdata.Dnb[2].value);     // 载体系b相对于导航坐标系n的姿态阵,也就是在t(m-1)时刻有b系转换为n系的姿态捷联矩阵
+    Direct_cosine_matrix Cnb_m_1(inputdata.Dnb.value);     // 载体系b相对于导航坐标系n的姿态阵,也就是在t(m-1)时刻有b系转换为n系的姿态捷联矩阵
     Direct_cosine_matrix Cnb_m(Cnm_nm_1.value * Cnb_m_1.value * Cbm_1_bm.value);    // 在t(m)时刻的捷联姿态矩阵
     attitude_data.Cnb_m = Cnb_m;
 }
@@ -211,7 +234,7 @@ void update::speed_update()
     // inputdata.T / 2 是否正确？？？？？？
 
     //计算运载体在导航系下的几何运动速度
-    Vector3f v_nm = speed_data[0].v_nem = delta_v_nsf + delta_v_ncorg;
+    Vector3f v_nm = speed_data[0].v_nem + delta_v_nsf + delta_v_ncorg;
     speed_updating_data v_nm_m; v_nm_m.v_nem = v_nm;
     speed_data.push_back(v_nm_m);   // 将 m 时刻的速度更新结果增加到内存中
 }
