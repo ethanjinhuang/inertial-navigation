@@ -1,5 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(attitude_matrix_convert.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  attitude_matrix.cpp
-  main.cpp
-  正在生成代码...
-  attitude_matrix_convert.vcxproj -> D:\GitHub\inertial navigation\黄瑾\inertial-navigation - 副本\Debug\inertial-navigation.exe

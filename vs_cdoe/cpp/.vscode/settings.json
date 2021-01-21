@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "ostream": "cpp",
-        "core": "cpp",
-        "superlusupport": "cpp",
-        "iostream": "cpp",
-        "cmath": "cpp"
-    }
-}

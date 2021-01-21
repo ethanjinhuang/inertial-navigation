@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>icon.ico</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>QRibbon/Resource/icon/open.ico</file>
+        <file>QRibbon/Resource/icon/save.ico</file>
+        <file>QRibbon/Resource/icon/help.ico</file>
+        <file>QRibbon/Resource/icon/save_image.ico</file>
+        <file>QRibbon/Resource/icon/save_log.ico</file>
+        <file>QRibbon/Resource/icon/unknow.png</file>
+        <file>QRibbon/Resource/icon/about.ico</file>
+    </qresource>
+</RCC>

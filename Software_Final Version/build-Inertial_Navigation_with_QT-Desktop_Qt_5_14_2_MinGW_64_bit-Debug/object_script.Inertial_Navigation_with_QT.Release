@@ -1,0 +1,16 @@
+release/QRibbon.o
+release/about_window.o
+release/attitude_matrix.o
+release/coordinate_convert.o
+release/earth_parameter.o
+release/global_variate.o
+release/main.o
+release/mainwindow.o
+release/public_func.o
+release/read_imr_file.o
+release/updating.o
+release/qrc_QRibbon.o
+release/qrc_icon.o
+release/moc_QRibbon.o
+release/moc_about_window.o
+release/moc_mainwindow.o

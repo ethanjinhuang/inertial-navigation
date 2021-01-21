@@ -1,0 +1,16 @@
+debug/QRibbon.o
+debug/about_window.o
+debug/attitude_matrix.o
+debug/coordinate_convert.o
+debug/earth_parameter.o
+debug/global_variate.o
+debug/main.o
+debug/mainwindow.o
+debug/public_func.o
+debug/read_imr_file.o
+debug/updating.o
+debug/qrc_QRibbon.o
+debug/qrc_icon.o
+debug/moc_QRibbon.o
+debug/moc_about_window.o
+debug/moc_mainwindow.o
